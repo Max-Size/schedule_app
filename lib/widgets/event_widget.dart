@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schedule_app/styles/text_styles.dart';
 import '../logic/event.dart';
 
 class EventWidget extends StatelessWidget {
@@ -31,13 +32,19 @@ class EventWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(event.name),
-                Text(event.place),
+                Text(
+                  event.name,
+                  style: TextStyles.eventNameStyle,
+                ),
+                Text(
+                  event.place,
+                  style: TextStyles.eventPlaceStyle,
+                ),
               ],
             ),
           ),
           Text(
-                  '${event.startTime.hour}:${event.startTime.minute} - ${event.endTime.hour}:${event.endTime.minute}')
+              '${event.startTime.hour}:${event.startTime.minute} - ${event.endTime.hour}:${event.endTime.minute}')
         ],
       ),
     );
