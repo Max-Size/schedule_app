@@ -5,25 +5,21 @@ import 'package:schedule_app/widgets/event_widget.dart';
 import 'package:schedule_app/widgets/week_widget.dart';
 
 import '../logic/event.dart';
+import '../styles/text_styles.dart';
 
 class DayWidget extends StatefulWidget {
   final String dayName;
   final List<Event> events;
 
-  DayWidget(this.dayName, this.events, {Key? key}) : super(key: key);
+  const DayWidget(this.dayName, this.events, {Key? key}) : super(key: key);
 
   @override
   State<DayWidget> createState() => _DayWidgetState();
 }
 
 class _DayWidgetState extends State<DayWidget> {
-
   @override
   Widget build(BuildContext context) {
-    if(widget.key!=null) print('it is created');
-    if(kDebugMode){
-      print(widget.events.length);
-    }
     return Card(
       color: Colors.white,
       shadowColor: Colors.black,
@@ -33,7 +29,18 @@ class _DayWidgetState extends State<DayWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.dayName),
+            Text(
+              widget.dayName,
+              style: TextStyles.dayNameStyle,
+            ),
+            if (widget.events.isEmpty)
+              const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Text(
+                  'Пока что пусто...',
+                  style: TextStyles.eventPlaceStyle,
+                ),
+              ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.events.length,
@@ -42,13 +49,14 @@ class _DayWidgetState extends State<DayWidget> {
                 return Row(
                   children: [
                     Expanded(child: EventWidget(widget.events[index])),
-                    TextButton(
+                    IconButton(
+                      style: const ButtonStyle(),
                       onPressed: () {
                         setState(() {
                           widget.events.removeAt(index);
                         });
                       },
-                      child: const Icon(
+                      icon: const Icon(
                         Icons.delete_forever,
                         color: Colors.red,
                       ),

@@ -22,76 +22,82 @@ class _EventDialogWidgetState extends State<EventDialogWidget> {
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
       title: const Text('Add event'),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Выберите дату:'),
-          DropdownButton<String>(
-            value: pickedDay,
-            items: [
-              for (var day in _daysOfWeek)
-                DropdownMenuItem(
-                  value: day,
-                  child: Text(day),
-                )
-            ],
-            onChanged: (String? value) {
-              setState(() {
-                pickedDay = value!;
-              });
-            },
-          ),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Start time:'),
-                  TextButton(
-                    onPressed: () async {
-                      startTime = await getTime(context);
-                      setState(() {});
-                    },
-                    child: Text(
-                        '${startTime?.hour.toString().padLeft(2, '0')}:${startTime!.minute.toString().padLeft(2, '0')}'),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Выберите дату:'),
+            DropdownButton<String>(
+              value: pickedDay,
+              items: [
+                for (var day in _daysOfWeek)
+                  DropdownMenuItem(
+                    value: day,
+                    child: Text(day),
                   )
-                ],
-              ),
-              const Expanded(
-                  child: SizedBox(
-                height: 1,
-              )),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('End time:'),
-                  TextButton(
-                    onPressed: () async {
-                      endTime = await getTime(context);
-                      setState(() {});
-                    },
-                    child: Text(
-                        '${endTime?.hour.toString().padLeft(2, '0')}:${endTime!.minute.toString().padLeft(2, '0')}'),
-                  )
-                ],
-              ),
-            ],
-          ),
-          const Text('Event name:'),
-          TextField(
-              controller: eventNameController,
+              ],
+              onChanged: (String? value) {
+                setState(() {
+                  pickedDay = value!;
+                });
+              },
+            ),
+            const SizedBox(height: 5,),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Start time:'),
+                    TextButton(
+                      onPressed: () async {
+                        startTime = await getTime(context);
+                        setState(() {});
+                      },
+                      child: Text(
+                          '${startTime?.hour.toString().padLeft(2, '0')}:${startTime!.minute.toString().padLeft(2, '0')}'),
+                    )
+                  ],
+                ),
+                const Expanded(
+                    child: SizedBox(
+                  height: 1,
+                )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('End time:'),
+                    TextButton(
+                      onPressed: () async {
+                        endTime = await getTime(context);
+                        setState(() {});
+                      },
+                      child: Text(
+                          '${endTime?.hour.toString().padLeft(2, '0')}:${endTime!.minute.toString().padLeft(2, '0')}'),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 5,),
+            const Text('Event name:'),
+            TextField(
+                controller: eventNameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'EventName...',
+                )),
+            const SizedBox(height: 5,),
+            const Text('Event place:'),
+            TextField(
+              controller: eventPlaceController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'EventName...',
-              )),
-          TextField(
-            controller: eventPlaceController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'EventPlace...',
+                hintText: 'EventPlace...',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         TextButton(
@@ -115,6 +121,7 @@ class _EventDialogWidgetState extends State<EventDialogWidget> {
   }
 }
 
+
 Future<TimeOfDay?> getTime(BuildContext context) {
   return showTimePicker(
       context: context,
@@ -135,7 +142,6 @@ void addEvent(
     required String place}) {
   final event = Event(
       name: eventNameController.text,
-      category: 'null',
       startTime: startTime,
       endTime: endTime,
       place: place);

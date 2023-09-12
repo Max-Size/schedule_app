@@ -1,18 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule_app/styles/text_styles.dart';
 import '../logic/event.dart';
 
 class EventWidget extends StatelessWidget {
   final Event event;
-  late final Color categoryColor;
 
-  EventWidget(this.event, {Key? key}) : super(key: key) {
-    if (event.category == 'Work') {
-      categoryColor = Colors.deepPurpleAccent;
-    } else {
-      categoryColor = Colors.yellowAccent;
-    }
-  }
+  const EventWidget(this.event, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +15,11 @@ class EventWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 20,
+            height: 30,
             width: 3,
-            color: categoryColor,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                color: CupertinoColors.systemIndigo),
           ),
           const SizedBox(
             width: 5,
@@ -44,7 +40,7 @@ class EventWidget extends StatelessWidget {
             ),
           ),
           Text(
-              '${event.startTime.hour}:${event.startTime.minute} - ${event.endTime.hour}:${event.endTime.minute}')
+              '${event.startTime.hour.toString().padLeft(2, '0')}:${event.startTime.minute.toString().padLeft(2, '0')} - ${event.endTime.hour.toString().padLeft(2, '0')}:${event.endTime.minute.toString().padLeft(2, '0')}')
         ],
       ),
     );

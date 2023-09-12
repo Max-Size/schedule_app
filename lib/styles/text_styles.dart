@@ -9,4 +9,9 @@ abstract class TextStyles {
     color: CupertinoColors.systemGrey,
     fontWeight: FontWeight.w500,
   );
+  static const dayNameStyle = TextStyle(
+    color: CupertinoColors.black,
+    fontSize: 15.5,
+    fontWeight: FontWeight.w500,
+  );
 }
