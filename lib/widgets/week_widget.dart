@@ -4,7 +4,7 @@ import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/widgets/day_widget.dart';
 
 class WeekWidget extends StatelessWidget {
-  const WeekWidget({Key? key}) : super(key: key);
+  WeekWidget({Key? key}) : super(key: key);
 
 
   @override

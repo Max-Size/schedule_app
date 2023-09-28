@@ -1,12 +1,9 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/widgets/event_dialog_widget.dart';
 import 'package:schedule_app/widgets/week_widget.dart';
 
-import 'logic/event.dart';
 import 'logic/storage.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,47 +17,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final AppLifecycleListener _listener;
+  bool loading = true;
 
   @override
   void initState() {
     super.initState();
     widget.storage.readFromFile().then((json) => setState(() {
-          if (kDebugMode) {
-            print(json);
-          }
+          loading = false;
           DaysOfWeek.fromJson(jsonDecode(json));
         }));
     _listener = AppLifecycleListener(onStateChange: (AppLifecycleState state) {
       switch (state) {
-        case AppLifecycleState.detached:
-          print('detached');
-          final json = jsonEncode(DaysOfWeek.toJson());
-          widget.storage.writeToFile(json);
-        case AppLifecycleState.resumed:
-          print('resumed');
-        case AppLifecycleState.inactive:
-          print('inactive');
-        case AppLifecycleState.hidden:
-          print('hidden');
         case AppLifecycleState.paused:
-          print('paused');
           final json = jsonEncode(DaysOfWeek.toJson());
           widget.storage.writeToFile(json);
+        default:
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print(jsonEncode(Event(
-              name: 'dfdf',
-              startTime: TimeOfDay.now(),
-              endTime: TimeOfDay.now(),
-              place: 'ererer')
-          .toJson()));
-    }
-    return Scaffold(
+    return loading?
+    const CircularProgressIndicator() :
+    Scaffold(
       backgroundColor: Colors.blue[100],
       body: WeekWidget(),
       floatingActionButton: FloatingActionButton(
@@ -70,9 +50,9 @@ class _HomePageState extends State<HomePage> {
               builder: (BuildContext context) {
                 return const EventDialogWidget();
               });
-          //final json = jsonEncode(DaysOfWeek.toJson());
-          //widget.storage.writeToFile(json);
-          setState(() {});
+          setState(() {
+            print('set state');
+          });
         },
         child: const Icon(Icons.add),
       ),

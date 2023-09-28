@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 
 abstract class TextStyles {
   static const eventNameStyle = TextStyle(
+    fontSize: 13,
     color: CupertinoColors.black,
     fontWeight: FontWeight.w600,
   );
   static const eventPlaceStyle = TextStyle(
+    fontSize: 11,
     color: CupertinoColors.systemGrey,
     fontWeight: FontWeight.w500,
   );

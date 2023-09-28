@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:schedule_app/logic/days_of_week.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:schedule_app/widgets/event_widget.dart';
-import 'package:schedule_app/widgets/week_widget.dart';
 
 import '../logic/event.dart';
 import '../styles/text_styles.dart';
@@ -46,22 +44,26 @@ class _DayWidgetState extends State<DayWidget> {
               itemCount: widget.events.length,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    Expanded(child: EventWidget(widget.events[index])),
-                    IconButton(
-                      style: const ButtonStyle(),
-                      onPressed: () {
-                        setState(() {
-                          widget.events.removeAt(index);
-                        });
-                      },
-                      icon: const Icon(
-                        Icons.delete_forever,
-                        color: Colors.red,
-                      ),
-                    )
-                  ],
+                return ClipRect(
+                  child: Slidable(
+                    endActionPane: ActionPane(
+                        extentRatio: 0.15,
+                        motion: const ScrollMotion(),
+                        children: [SlidableAction(
+                          onPressed: (BuildContext context){
+                            setState(() {
+                              widget.events.removeAt(index);
+                            });
+                          },
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.red,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        ),
+                        ]
+                    ),
+                    child: EventWidget(widget.events[index]),
+                  ),
                 );
               },
             )
