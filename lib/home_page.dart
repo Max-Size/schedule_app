@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/widgets/event_dialog_widget.dart';
@@ -51,7 +52,9 @@ class _HomePageState extends State<HomePage> {
                 return const EventDialogWidget();
               });
           setState(() {
-            print('set state');
+            if (kDebugMode) {
+              print('set state');
+            }
           });
         },
         child: const Icon(Icons.add),

@@ -1,8 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:schedule_app/widgets/event_widget.dart';
-
 import 'event.dart';
 
 abstract class DaysOfWeek {
