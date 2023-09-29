@@ -1,1 +1,5 @@
-
+name: FlutterPipeline
+on: push
+jobs:
+  building:
+    runs-on: ubuntu-latest

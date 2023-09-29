@@ -19,7 +19,7 @@ class Event{
   factory Event.fromJson(Map<String,dynamic> json){
     String name = json["name"];
     String place = json["place"];
-    int startTimeHour = int.parse(json["startTime"].split(":")[0]);
+    int startTimeHour = int.parse((json["startTime"] as String).split(":")[0]);
     int startTimeMinute = int.parse(json["startTime"].split(":")[1]);
     var startTime = TimeOfDay(hour: startTimeHour, minute: startTimeMinute);
     int endTimeHour = int.parse(json["endTime"].split(":")[0]);

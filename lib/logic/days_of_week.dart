@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'event.dart';
 
 abstract class DaysOfWeek {
@@ -73,5 +75,4 @@ abstract class DaysOfWeek {
       return a.startTime.hour - b.startTime.hour;
     });
   }
-  fdfd
 }
