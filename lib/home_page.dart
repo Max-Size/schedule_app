@@ -39,11 +39,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('home page rebuilt');
     return loading?
     const CircularProgressIndicator() :
     Scaffold(
       backgroundColor: Colors.blue[100],
-      body: WeekWidget(),
+      body: const WeekWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await showAdaptiveDialog(

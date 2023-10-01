@@ -1,9 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:schedule_app/widgets/event_widget.dart';
 
 import '../logic/event.dart';
 import '../styles/text_styles.dart';
+
+final mondayKey = GlobalKey<_DayWidgetState>();
+final tuesdayKey = GlobalKey<_DayWidgetState>();
+final wednesdayKey = GlobalKey<_DayWidgetState>();
+final thursdayKey = GlobalKey<_DayWidgetState>();
+final fridayKey = GlobalKey<_DayWidgetState>();
+final saturdayKey = GlobalKey<_DayWidgetState>();
+final sundayKey = GlobalKey<_DayWidgetState>();
 
 class DayWidget extends StatefulWidget {
   final String dayName;
@@ -16,8 +25,18 @@ class DayWidget extends StatefulWidget {
 }
 
 class _DayWidgetState extends State<DayWidget> {
+  
+  void addEvent(){
+    if (kDebugMode) {
+      print('event added!');
+    }
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('day widget builded');
     return Card(
       color: Colors.white,
       shadowColor: Colors.black,

@@ -13,36 +13,38 @@ class EventWidget extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       child: Row(
         children: [
-        Container(
-        height: 30,
-        width: 3,
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-            color: CupertinoColors.systemIndigo),
-      ),
-      const SizedBox(
-        width: 5,
-      ),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              event.name,
-              style: TextStyles.eventNameStyle,
+          Container(
+            height: 30,
+            width: 3,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                color: CupertinoColors.systemIndigo),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  event.name,
+                  style: TextStyles.eventNameStyle,
+                ),
+                Text(
+                  event.place,
+                  style: TextStyles.eventPlaceStyle,
+                ),
+              ],
             ),
-            Text(
-              event.place,
-              style: TextStyles.eventPlaceStyle,
-            ),
-          ],
-        ),
-      ),
-      Column(
-        children: [
-          Text('${event.startTime.hour.toString().padLeft(2, '0')}:${event
-              .startTime.minute.toString().padLeft(2, '0')}'),
-          Text('${event.endTime.hour.toString().padLeft(2, '0')}:${event.endTime.minute.toString().padLeft(2, '0')}')],
+          ),
+          Column(
+            children: [
+              Text(
+                  '${event.startTime.hour.toString().padLeft(2, '0')}:${event.startTime.minute.toString().padLeft(2, '0')}'),
+              Text(
+                  '${event.endTime.hour.toString().padLeft(2, '0')}:${event.endTime.minute.toString().padLeft(2, '0')}')
+            ],
           ),
         ],
       ),

@@ -4,3 +4,6 @@ jobs:
   building:
     name: building
     runs-on: ubuntu-latest
+    steps:
+      - name: step1
+        uses: 
