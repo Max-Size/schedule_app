@@ -149,7 +149,6 @@ void addEvent(
   switch (weekDay) {
     case 'Понедельник':
       DaysOfWeek.addMondayEvent(event);
-      mondayKey.currentState?.addEvent();      
       break;
     case 'Вторник':
       DaysOfWeek.addTuesdayEvent(event);

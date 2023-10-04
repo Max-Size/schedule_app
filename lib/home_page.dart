@@ -5,7 +5,9 @@ import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/widgets/event_dialog_widget.dart';
 import 'package:schedule_app/widgets/week_widget.dart';
 
+import 'logic/event.dart';
 import 'logic/storage.dart';
+import 'providers/event_provider.dart';
 
 class HomePage extends StatefulWidget {
   final WeekStorage storage;
@@ -44,7 +46,15 @@ class _HomePageState extends State<HomePage> {
     const CircularProgressIndicator() :
     Scaffold(
       backgroundColor: Colors.blue[100],
-      body: const WeekWidget(),
+      body: EventProvider(
+          mondayEvents: [...DaysOfWeek.mondayEvents],
+          tuesdayEvents: [...DaysOfWeek.tuesdayEvents],
+          wednesdayEvents: [...DaysOfWeek.wednesdayEvents],
+          thursdayEvents: [...DaysOfWeek.thursdayEvents],
+          fridayEvents: [...DaysOfWeek.fridayEvents],
+          saturdayEvents: [...DaysOfWeek.saturdayEvents],
+          sundayEvents: [...DaysOfWeek.sundayEvents],
+          child: const WeekWidget()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await showAdaptiveDialog(

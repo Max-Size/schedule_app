@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:schedule_app/providers/event_provider.dart';
 import 'package:schedule_app/widgets/event_widget.dart';
 
 import '../logic/event.dart';
@@ -16,9 +17,8 @@ final sundayKey = GlobalKey<_DayWidgetState>();
 
 class DayWidget extends StatefulWidget {
   final String dayName;
-  final List<Event> events;
 
-  const DayWidget(this.dayName, this.events, {Key? key}) : super(key: key);
+  const DayWidget(this.dayName, {Key? key}) : super(key: key);
 
   @override
   State<DayWidget> createState() => _DayWidgetState();
@@ -26,16 +26,29 @@ class DayWidget extends StatefulWidget {
 
 class _DayWidgetState extends State<DayWidget> {
   
-  void addEvent(){
-    if (kDebugMode) {
-      print('event added!');
-    }
-    setState(() {
-    });
-  }
+  late List<Event> events;
 
   @override
   Widget build(BuildContext context) {
+
+    switch(widget.dayName){
+      case "Monday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.mondayEvents ?? [];
+      case "Tuesday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.tuesdayEvents ?? [];
+      case "Wednesday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.wednesdayEvents ?? [];
+      case "Thursday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.thursdayEvents ?? [];
+      case "Friday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.fridayEvents ?? [];
+      case "Saturday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.saturdayEvents ?? [];
+      case "Sunday":
+        events = context.dependOnInheritedWidgetOfExactType<EventProvider>(aspect: widget.dayName.toLowerCase())?.sundayEvents ?? [];
+    }    
+
+
     print('day widget builded');
     return Card(
       color: Colors.white,
@@ -50,7 +63,7 @@ class _DayWidgetState extends State<DayWidget> {
               widget.dayName,
               style: TextStyles.dayNameStyle,
             ),
-            if (widget.events.isEmpty)
+            if (events.isEmpty)
               const Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Text(
@@ -60,7 +73,7 @@ class _DayWidgetState extends State<DayWidget> {
               ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.events.length,
+              itemCount: events.length,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 return ClipRect(
@@ -71,7 +84,7 @@ class _DayWidgetState extends State<DayWidget> {
                         children: [SlidableAction(
                           onPressed: (BuildContext context){
                             setState(() {
-                              widget.events.removeAt(index);
+                              events.removeAt(index);
                             });
                           },
                           backgroundColor: Colors.white,
@@ -81,7 +94,7 @@ class _DayWidgetState extends State<DayWidget> {
                         ),
                         ]
                     ),
-                    child: EventWidget(widget.events[index]),
+                    child: EventWidget(events[index]),
                   ),
                 );
               },
