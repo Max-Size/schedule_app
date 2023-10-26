@@ -11,7 +11,6 @@ import 'providers/event_provider.dart';
 
 class HomePage extends StatefulWidget {
   final WeekStorage storage;
-
   const HomePage({Key? key, required this.storage}) : super(key: key);
 
   @override
@@ -21,7 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final AppLifecycleListener _listener;
   bool loading = true;
-
   @override
   void initState() {
     super.initState();
