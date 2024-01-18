@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/widgets/event_dialog_widget.dart';
 import 'package:schedule_app/widgets/week_widget.dart';
-
-import 'logic/event.dart';
 import 'logic/storage.dart';
 import 'providers/event_provider.dart';
 
