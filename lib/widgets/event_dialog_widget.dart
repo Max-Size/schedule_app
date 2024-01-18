@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:schedule_app/logic/days_of_week.dart';
 import 'package:schedule_app/logic/event.dart';
-import 'package:schedule_app/widgets/day_widget.dart';
 
 class EventDialogWidget extends StatefulWidget {
   const EventDialogWidget({
@@ -152,27 +151,21 @@ void addEvent(
       break;
     case 'Вторник':
       DaysOfWeek.addTuesdayEvent(event);
-      tuesdayKey.currentState?.addEvent();      
       break;
     case 'Среда':
       DaysOfWeek.addWednesdayEvent(event);
-      wednesdayKey.currentState?.addEvent();      
       break;
     case 'Четверг':
       DaysOfWeek.addThursdayEvent(event);
-      thursdayKey.currentState?.addEvent();      
       break;
     case 'Пятница':
       DaysOfWeek.addFridayEvent(event);
-      fridayKey.currentState?.addEvent();
       break;
     case 'Суббота':
       DaysOfWeek.addSaturdayEvent(event);
-      saturdayKey.currentState?.addEvent();
       break;
     case 'Воскресенье':
       DaysOfWeek.addSundayEvent(event);
-      sundayKey.currentState?.addEvent();
   }
 }
 

@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:schedule_app/logic/days_of_week.dart';
-import 'package:schedule_app/providers/event_provider.dart';
 import 'package:schedule_app/widgets/day_widget.dart';
 
 
