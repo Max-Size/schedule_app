@@ -5,7 +5,7 @@ This project provides users an app that allow them make own schedule and edit ed
 ## Techologies
 - InheritedModel - state managment
 - path_provider - getting access to the directory for storing data
-- flutter_slidable - fordeleting the event on slide
+- flutter_slidable - for deleting the event on slide
 ## Overview 
 <img src="https://github.com/Max-Size/schedule_app/assets/125485047/cd46301e-c84b-4507-a570-775cfbd64575" width="500"/>
 <img src="https://github.com/Max-Size/schedule_app/assets/125485047/bcff539b-daee-438b-9bbe-6846b6c04e6b" width="500"/>
